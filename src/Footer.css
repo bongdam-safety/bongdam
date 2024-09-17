@@ -1,0 +1,20 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer div {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .footer div:hover {
+    background-color: #555;
+  }
+  
