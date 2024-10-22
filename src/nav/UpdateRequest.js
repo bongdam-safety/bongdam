@@ -54,7 +54,7 @@ const UpdateRequest = () => {
         />
 
         <label>위치</label>
-        <KakaoMap />
+        <KakaoMap category="all" width="500px" height="500px"/>
 
         <label>사진 첨부</label>
         <input

@@ -9,15 +9,14 @@ import KakaoMap from './KakaoMap';
 const Home = () => {
 
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const handleClick = () => {
     navigate('/');
   };
   
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
   const handleCategorySelect = (category) => {
-    selectedCategory(category);
+    setSelectedCategory(category);
   }
 
   return (
@@ -26,8 +25,8 @@ const Home = () => {
         봉담 마을 지도
       </h1>
       <Navbar />
-      <KakaoMap />
-      <Footer />
+      <KakaoMap category={selectedCategory}/>
+      <Footer onCategorySelect={handleCategorySelect}/>
     </div>
   );
 };

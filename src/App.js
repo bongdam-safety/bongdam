@@ -22,13 +22,8 @@ function App() {
               <Route path="/UpdateRequest" element={<UpdateRequest/>} />
       </Routes>
     </div>
-    </Router>
-      
-  
-          
-        
+    </Router> 
 
-   
   );
 };
 

@@ -38,7 +38,7 @@ const Add = () => {
         <h1 onClick={handleGoHome} style={{cursor:'pointer'}}>봉담 마을 지도</h1>
       </div>
       <h1>시설물 추가 요청</h1>
-      <KakaoMap/> 
+      <KakaoMap category="all" width="500px" height="500px"/> 
       <form onSubmit={handleSubmit} className="add-form">
         <label>분류</label>
         <input
