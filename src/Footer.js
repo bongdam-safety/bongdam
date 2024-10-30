@@ -1,14 +1,15 @@
 import React from "react";
-import "./Footer.css"; // 스타일을 위한 CSS 파일을 임포트
+import "./KakaoMap"; 
+import "./Footer.css";
 
 const Footer = ({ onCategorySelect }) => {
   return (
     <div className="footer">
-      <div onClick={() => onCategorySelect("cctv")}>방범 CCTV</div>
-      <div onClick={() => onCategorySelect("bell")}>비상벨</div>
-      <div onClick={() => onCategorySelect("safetyHouse")}>안심지킴이집 지구대</div>
-      <div onClick={() => onCategorySelect("projector")}>로고젝터</div>
-      <div onClick={() => onCategorySelect("others")}>기타</div>
+      <div onClick={() => onCategorySelect(1)}>방범 CCTV</div>
+      <div onClick={() => onCategorySelect(2)}>비상벨</div>
+      <div onClick={() => onCategorySelect(3)}>안심지킴이집 지구대</div>
+      <div onClick={() => onCategorySelect(4)}>로고젝터</div>
+      <div onClick={() => onCategorySelect(5)}>기타</div>
     </div>
   );
 };

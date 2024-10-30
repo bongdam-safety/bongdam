@@ -9,7 +9,7 @@ import Login from './nav/Login';
 import Add from './nav/Add';
 import UpdateRequest from './nav/UpdateRequest';
 import { Form } from 'react-bootstrap';
-
+import MainComponent from './MainComponent';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Add" element={<Add />} />
               <Route path="/UpdateRequest" element={<UpdateRequest/>} />
+              <Route path="/map" element={<MainComponent />} />  
       </Routes>
     </div>
     </Router> 
