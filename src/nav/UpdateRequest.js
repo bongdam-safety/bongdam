@@ -38,13 +38,7 @@ const UpdateRequest = () => {
 
       <h1>정보 수정 요청</h1>
       <form onSubmit={handleSubmit} className="update-form">
-        <label>제목</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목 입력"
-        />
+
 
         <label>요청 사항</label>
         <textarea

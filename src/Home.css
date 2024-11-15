@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between; /* 제목과 버튼을 양 끝에 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.home-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.login-button {
+  margin-left: auto; /* 버튼을 오른쪽 끝으로 밀어냄 */
+}
+
+.login-button .btn {
+  background-color: white; /* 흰색 배경 */
+  border: 1px solid black; /* 검정색 테두리 */
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}

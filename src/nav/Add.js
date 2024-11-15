@@ -48,14 +48,7 @@ const Add = () => {
           placeholder="시설물 분류 입력"
         />
 
-        <label>제목</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목 입력"
-        />
-
+  
         <label>내용</label>
         <textarea
           value={content}
