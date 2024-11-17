@@ -1,0 +1,69 @@
+.popup-container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 300px; /* 팝업 너비 고정 */
+  box-sizing: border-box;
+}
+
+.popup-title {
+  font-size: 18px;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.popup-content {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.popup-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 15px; /* 이미지와 수정 버튼 사이에 간격 추가 */
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 18px; /* 작은 크기 */
+  cursor: pointer;
+  padding: 0;
+  width: 20px; /* 버튼 크기 */
+  height: 20px; /* 버튼 크기 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-close-button:hover {
+  color: #f00;
+}
+
+.popup-edit-button {
+  width: 100%;
+  padding: 10px;
+  border-color:white;
+  border-radius: 8px;
+  color: white;
+  background-color: #76f07d;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px; /* 버튼과 이미지 사이에 간격 추가 */
+}
+
+.popup-edit-button:hover {
+  background-color: #45a049;
+}

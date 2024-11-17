@@ -23,11 +23,16 @@ const Home = () => {
         <h1 onClick={handleClick} className="home-title">
           봉담읍 마을 안전지도
         </h1>
-        <Link to="/Login" className="login-button">
-          <button className="btn">로그인</button>
-        </Link>
+        <div className="button-container">
+          <Link to="/RequestPage" className="add-button">
+            <button className="btn">시설물 설치 요청</button>
+          </Link>
+          <Link to="/Login" className="login-button">
+            <button className="btn">로그인</button>
+          </Link>
+        </div>
       </div>
-      <KakaoMap category={selectedCategory} />
+      <KakaoMap category={selectedCategory} showMarkerOnClick={false}/>
       <Footer onCategorySelect={handleCategorySelect} />
     </div>
   );

@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
   const navigate = useNavigate();
   const handleGoHome = () => {
     navigate('/');
   };
-  
-  const [isLoginMode, setIsLoginMode] = useState(true); // 로그인과 회원가입을 전환하는 상태
 
-  // 로그인 상태
+  const [isLoginMode, setIsLoginMode] = useState(true); // 로그인 모드 상태
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // 로그인 처리 로직 (현재는 단순한 콘솔 출력으로 대체)
-    console.log('로그인 시도:', { email, password });
+
+    // 로그인 성공 처리
+    console.log('로그인 성공:', { email, password });
+    navigate('/admin'); // `/admin` 페이지로 이동
   };
 
   return (
     <div className="home-container">
       <div>
-        <h1 onClick={handleGoHome} style={{cursor:'pointer'}}>봉담읍 마을 안전지도</h1>
+        <h1 onClick={handleGoHome} style={{ cursor: 'pointer' }}>
+          봉담읍 마을 안전지도
+        </h1>
       </div>
 
-
       {isLoginMode && (
-        // 로그인 폼
         <form onSubmit={handleLoginSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email">이메일</label>

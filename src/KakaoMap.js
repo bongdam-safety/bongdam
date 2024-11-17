@@ -1,122 +1,174 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './Popup.css';
 
 const { kakao } = window;
 
-function KakaoMap({ category, width = '100%', height = '100vh' }) {
-    const [markersData, setMarkersData] = useState([]);
-    const mapRef = useRef(null);
 
+function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect, showMarkerOnClick = true }) {
+    const [markersData, setMarkersData] = useState([]);
+    const [popupInfo, setPopupInfo] = useState(null);
+    const mapRef = useRef(null);
+    const markersRef = useRef([]); // 마커 배열을 관리
+    const navigate = useNavigate();
+
+    // 카테고리 변경 시 마커 데이터 가져오기
     useEffect(() => {
         const fetchMarkers = async () => {
             try {
                 const response = await axios.get(`/api/facility/category/${category}`);
-                setMarkersData(response.data);  // 응답 데이터를 저장
+                setMarkersData(response.data);
+                setPopupInfo(null); // 팝업 초기화
             } catch (error) {
                 console.error("Error fetching marker data:", error);
             }
         };
 
-        fetchMarkers();  // 컴포넌트 마운트 시 마커 데이터 가져오기
+        fetchMarkers();
     }, [category]);
 
+    // 지도 및 마커 처리
     useEffect(() => {
-        if (window.kakao && window.kakao.maps) {
-            const container = document.getElementById('map');
-            const options = {
-                center: new kakao.maps.LatLng(37.2153629206238, 126.965393754958), // 초기 맵 중심
-                level: 5
-            };
+        if (!window.kakao || !window.kakao.maps) {
+            console.error("Kakao Maps API is not loaded properly");
+            return;
+        }
 
-      
-            if (!mapRef.current) {
-                mapRef.current = new kakao.maps.Map(container, options);
-            }
-            const map = mapRef.current;
-            
+        const container = document.getElementById('map');
+        const options = {
+            center: new kakao.maps.LatLng(37.2153629206238, 126.965393754958),
+            level: 5,
+        };
 
-            let currentInfowindow = null;
-            const markers = [];
+        if (!mapRef.current) {
+            mapRef.current = new kakao.maps.Map(container, options);
+        }
 
-            // 사용자 위치 표시 함수
-            const displayUserLocation = (lat, lon) => {
-                const locPosition = new kakao.maps.LatLng(lat, lon);
+        const map = mapRef.current;
+
+        // 사용자 위치 표시
+        const displayUserLocation = (lat, lon) => {
+            const locPosition = new kakao.maps.LatLng(lat, lon);
+            const marker = new kakao.maps.Marker({
+                position: locPosition,
+                title: '내 위치',
+            });
+            marker.setMap(map);
+        };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    displayUserLocation(latitude, longitude);
+                },
+                error => {
+                    console.error("Error getting user location:", error);
+                }
+            );
+        } else {
+            console.warn("Geolocation을 지원하지 않습니다.");
+        }
+
+        // 지도 클릭 시 마커 표시 (showMarkerOnClick이 true일 때만)
+        if (showMarkerOnClick) {
+            kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+                const latlng = mouseEvent.latLng;
+
+                markersRef.current.forEach((marker) => marker.setMap(null));
+                markersRef.current = []; // 마커 배열 초기화
+
+
+              
+                if (onLocationSelect) {
+                    onLocationSelect(latlng.getLat(), latlng.getLng()); // 부모 컴포넌트에 클릭 좌표 전달
+                }
+
+                // 클릭한 위치에 마커 추가
                 const marker = new kakao.maps.Marker({
-                    position: locPosition,
-                    title: '내 위치',
+                    position: latlng,
+                    map: map,
+                });
+
+                markersRef.current.push(marker); // 새 마커 저장
+                if (onLocationSelect) {
+                    onLocationSelect(latlng.getLat(), latlng.getLng()); // 부모 컴포넌트에 클릭 좌표 전달
+                }
+            });
+        }
+
+        // 기존 마커 제거 및 새 마커 추가
+        const addMarkers = () => {
+            markersRef.current.forEach((marker) => marker.setMap(null));
+            markersRef.current = []; // 마커 배열 초기화
+
+            markersData.forEach(({ latitude, longitude, facilityCategory, content, imageUrls }) => {
+                const markerPosition = new kakao.maps.LatLng(latitude, longitude);
+                const marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                    title: facilityCategory.categoryName,
                 });
                 marker.setMap(map);
-              //  map.setCenter(locPosition); // 지도의 중심을 사용자 위치로 설정
-              
-            };
+                markersRef.current.push(marker); // 새 마커 저장
 
-            // Geolocation API로 현재 위치 가져오기
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const { latitude, longitude } = position.coords;
-                        displayUserLocation(latitude, longitude);
-                    },
-                    error => {
-                        console.error("Error getting user location:", error);
-                    }
-                );
-            } else {
-                console.warn("Geolocation을 지원하지 않습니다.");
-            }
-
-            // 마커 추가 함수
-            const addMarkers = () => {
-                markers.forEach(marker => marker.setMap(null));
-                markers.length = 0;
-
-                markersData.forEach(({ latitude, longitude, facilityCategory, content, imageUrls }) => {
-                    const markerPosition = new kakao.maps.LatLng(latitude, longitude);
-                    const marker = new kakao.maps.Marker({
+                kakao.maps.event.addListener(marker, 'click', () => {
+                    setPopupInfo({
                         position: markerPosition,
                         title: facilityCategory.categoryName,
-                    });
-                    marker.setMap(map);
-                    markers.push(marker);
-
-                    const infowindow = new kakao.maps.InfoWindow({
-                        content: `<div style="padding:40px;">
-                                <h5>${facilityCategory.categoryName}</h5>
-                                <p>${content}</p>
-                                <img src="${imageUrls}" alt="Facility Image" style="width:300px; height:auto;" />
-                                </div>`,
+                        content: content,
+                        image: imageUrls,
                     });
 
-                    kakao.maps.event.addListener(marker, 'click', () => {
-                        if (currentInfowindow) {
-                            currentInfowindow.close();
-                        }
-                        
-                        infowindow.open(map, marker);
-                        currentInfowindow = infowindow;
-
-                        map.setCenter(markerPosition); // 클릭한 마커 위치로 이동
-                    });
+                    map.setCenter(markerPosition); // 클릭한 마커 위치로 이동
                 });
-            };
+            });
+        };
 
-            // 마커 갱신
-            addMarkers();
-        } else {
-            console.error("Kakao Maps API is not loaded properly");
-        }
-    }, [markersData]);
+        addMarkers();
+    }, [markersData, showMarkerOnClick]);
+
+    // 수정 버튼 클릭 시 이동
+    const handleEditClick = () => {
+        navigate('/UpdateRequest');
+    };
 
     return (
-        <div 
-            id='map'
-            style={{
-                width: width,
-                height: height,
-                margin: '0 auto',
-            }}>
-        </div>
+        <>
+            <div 
+                id='map'
+                style={{
+                    width: width,
+                    height: height,
+                    margin: '0 auto',
+                }}>
+            </div>
+            {popupInfo && (
+                <div className="popup-container">
+                    <button 
+                        onClick={() => setPopupInfo(null)}
+                        className="popup-close-button">
+                        ✖
+                    </button>
+                    <h3 className="popup-title">{popupInfo.title}</h3>
+                    <p className="popup-content">{popupInfo.content}</p>
+                    {popupInfo.image && (
+                        <img 
+                            src={popupInfo.image} 
+                            alt="Facility" 
+                            className="popup-image" 
+                        />
+                    )}
+                    <button 
+                        onClick={handleEditClick} 
+                        className="popup-edit-button">
+                        수정
+                    </button>
+                </div>
+            )}
+        </>
     );
 }
 
 export default KakaoMap;
+

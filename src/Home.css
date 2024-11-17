@@ -12,10 +12,12 @@
   margin: 0;
 }
 
-.login-button {
-  margin-left: auto; /* 버튼을 오른쪽 끝으로 밀어냄 */
+.button-container {
+  display: flex; /* 버튼들을 나란히 배치 */
+  gap: 10px; /* 버튼 사이의 간격 */
 }
 
+.add-button .btn,
 .login-button .btn {
   background-color: white; /* 흰색 배경 */
   border: 1px solid black; /* 검정색 테두리 */

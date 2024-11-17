@@ -1,0 +1,32 @@
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    border: 1px solid #ddd; /* 가로, 세로 줄 */
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .admin-table th {
+    background-color: #f2f2f2; /* 헤더 배경색 */
+    font-weight: bold;
+  }
+  
+  .admin-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* 짝수 줄 배경색 */
+  }
+  
+  .admin-table tr:hover {
+    background-color: #f1f1f1; /* 마우스 오버 시 */
+  }
+  
+  .admin-table img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  

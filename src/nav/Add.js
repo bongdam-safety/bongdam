@@ -70,7 +70,7 @@ const Add = () => {
           onChange={handlePictureChange}
         />
 
-        <label>비고</label>
+        <label>관리자 전달 사항</label>
         <input
           type="text"
           value={remarks}

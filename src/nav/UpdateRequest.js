@@ -33,10 +33,9 @@ const UpdateRequest = () => {
   return (
     <div className="update-container">
      <div>
-        <h1 onClick={handleGoHome} style={{cursor:'pointer'}}>봉담 마을 지도</h1>
+        <h1 onClick={handleGoHome} style={{cursor:'pointer'}}>봉담읍 마을 안전지도</h1>
       </div>
-
-      <h1>정보 수정 요청</h1>
+      <h2>정보 수정 요청</h2>
       <form onSubmit={handleSubmit} className="update-form">
 
 
@@ -46,9 +45,6 @@ const UpdateRequest = () => {
           onChange={(e) => setDetails(e.target.value)}
           placeholder="요청 사항 입력"
         />
-
-        <label>위치</label>
-        <KakaoMap category="all" width="500px" height="500px"/>
 
         <label>사진 첨부</label>
         <input

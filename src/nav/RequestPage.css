@@ -1,4 +1,4 @@
-.update-container {
+.request-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,18 +10,19 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin: 0;
   }
-
-
-  .update-container h1{
+  
+  .request-container h1 {
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
     color: black;
   }
 
-  .update-form {
+
+  
+  .request-form {
     display: flex;
     flex-direction: column;
     max-width: 500px;
@@ -32,13 +33,13 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
   
-  .update-form label {
+  .request-form label {
     margin-bottom: 8px;
     font-weight: bold;
   }
   
-  .update-form input,
-  .update-form textarea {
+  .request-form input,
+  .request-form textarea {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -46,24 +47,30 @@
     font-size: 16px;
   }
   
-  .update-form button {
+  .request-form button {
     padding: 10px 20px;
     background-color: white;
+    color: black;
     border: 1px solid #333; 
     border-radius: 8px;
-    color: #333;
     cursor: pointer;
     font-size: 16px;
   }
   
-  .update-form button:hover {
-    background-color:  #333;
+  .request-form button:hover {
+    background-color: #333;
     color: white;
   }
-
   
-  
-  .update-form input[type="file"] {
+  .request-form input[type="file"] {
     padding: 0;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #28a745;
   }
   
