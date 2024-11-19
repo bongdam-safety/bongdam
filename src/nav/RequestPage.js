@@ -31,8 +31,8 @@ const RequestPage = () => {
 
     // 요청에 필요한 데이터
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('contact', contact);
+    formData.append('requester_name', name);
+    formData.append('requester_contact', contact);
     formData.append('title', title);
     formData.append('content', content);
 
@@ -45,12 +45,12 @@ const RequestPage = () => {
     }
 
     if (image) {
-      formData.append('image', image);
+      formData.append('images', image);
     }
 
     try {
       // API 호출
-      const response = await axios.post('/api/request_ToCenter', formData, {
+      const response = await axios.post(`/api/request_ToCenter`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
