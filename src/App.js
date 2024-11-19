@@ -21,7 +21,7 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Admin" element={<Admin />} />
               <Route path='/RequestPage' element={<RequestPage />}/>
-              <Route path='/UpdateRequest' element={<UpdateRequest/>}/>
+           
               <Route path="/Add" element={<Add />} />
               <Route path="/map" element={<MainComponent />} />  
       </Routes>

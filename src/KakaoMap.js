@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 import './Popup.css';
-
 const { kakao } = window;
 
 
@@ -50,11 +50,21 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
         // 사용자 위치 표시
         const displayUserLocation = (lat, lon) => {
             const locPosition = new kakao.maps.LatLng(lat, lon);
+            const imageSrc = './299087_marker_map_icon.png'; // 마커 이미지 URL
+            const imageSize = new kakao.maps.Size(40, 40); // 마커 이미지 크기
+            const imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커 이미지 옵션
+
+            const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+           
             const marker = new kakao.maps.Marker({
                 position: locPosition,
                 title: '내 위치',
+                image:markerImage,
             });
             marker.setMap(map);
+
+            map.setCenter(locPosition);
         };
 
         if (navigator.geolocation) {
@@ -78,8 +88,6 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
 
                 markersRef.current.forEach((marker) => marker.setMap(null));
                 markersRef.current = []; // 마커 배열 초기화
-
-
               
                 if (onLocationSelect) {
                     onLocationSelect(latlng.getLat(), latlng.getLng()); // 부모 컴포넌트에 클릭 좌표 전달
@@ -128,10 +136,7 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
         addMarkers();
     }, [markersData, showMarkerOnClick]);
 
-    // 수정 버튼 클릭 시 이동
-    const handleEditClick = () => {
-        navigate('/UpdateRequest');
-    };
+
 
     return (
         <>
@@ -144,28 +149,25 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
                 }}>
             </div>
             {popupInfo && (
-                <div className="popup-container">
-                    <button 
-                        onClick={() => setPopupInfo(null)}
-                        className="popup-close-button">
-                        ✖
-                    </button>
-                    <h3 className="popup-title">{popupInfo.title}</h3>
-                    <p className="popup-content">{popupInfo.content}</p>
-                    {popupInfo.image && (
-                        <img 
-                            src={popupInfo.image} 
-                            alt="Facility" 
-                            className="popup-image" 
-                        />
-                    )}
-                    <button 
-                        onClick={handleEditClick} 
-                        className="popup-edit-button">
-                        수정
-                    </button>
-                </div>
-            )}
+    <div className="popup-container">
+        <button 
+            onClick={() => setPopupInfo(null)}
+            className="popup-close-button">
+            ✖
+        </button>
+        <h3 className="popup-title">{popupInfo.title}</h3>
+        <p className="popup-content">{popupInfo.content}</p>
+        
+        {popupInfo.image && (
+            <img 
+                src={popupInfo.image[0]}  // 첫 번째 이미지를 표시
+                alt="Facility" 
+                className="popup-image" 
+            />
+        )}
+    </div>
+)}
+
         </>
     );
 }
