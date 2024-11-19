@@ -37,8 +37,8 @@ const Add = () => {
         <div>
         <h1 onClick={handleGoHome} style={{cursor:'pointer'}}>봉담 마을 지도</h1>
       </div>
-      <h1>시설물 추가 요청</h1>
-      <KakaoMap category="all" width="500px" height="500px"/> 
+      <div className="auth-form">
+      <KakaoMap category="all" width="100%" height="300px"/> 
       <form onSubmit={handleSubmit} className="add-form">
         <label>분류</label>
         <input
@@ -70,16 +70,13 @@ const Add = () => {
           onChange={handlePictureChange}
         />
 
-        <label>관리자 전달 사항</label>
-        <input
-          type="text"
-          value={remarks}
-          onChange={(e) => setRemarks(e.target.value)}
-          placeholder="비고 입력"
-        />
-
-        <button type="submit">제출하기</button>
+        <div className="submit">
+          <button>
+             추가하기 
+          </button>
+        </div>
       </form>
+    </div>
     </div>
   );
 };

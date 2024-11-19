@@ -1,11 +1,22 @@
 .add-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color:  #dbead5;
+  border-radius: 12px;
+  min-height: 100vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  }
+  .add-container h1{
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;  /* 글자 색상 */
   }
   
   .add-form {
@@ -20,28 +31,53 @@
   
   .add-form input,
   .add-form textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
     font-size: 16px;
+    border: 1px solid #ccc;  /* 입력창 테두리 색상 */
+    border-radius: 8px;
+    width: 100%;
+    background-color: #fafafa; /* 입력창 배경 색상 */
+    color: #333;
+    margin-bottom: 10px;
+  }
+   
+  .add-form input,
+  .add-form textarea:focus{
+    border-color: #28b078;  /* 포커스 색상 통일 */
+    outline: none;
+    background-color: #fff;
+  }
+  
+  .add-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
   
   .add-form button {
-    padding: 10px 20px;
-    background-color:  #007bff;;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 12px 20px;
     font-size: 16px;
+    color: #333; /* 버튼 글자 색상 */
+    background-color: white;  /* 버튼 배경 색상 */
+    border: 1px solid #333;  /* 버튼 테두리 색상 */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* 버튼의 너비를 100%로 설정 */
+    margin-bottom: 10px; /* 버튼 간의 간격 추가 */
   }
   
+
+
+  
   .add-form button:hover {
-    background-color: #0056b3;
+    background-color: #333;
+    color: white;
   }
   
   .add-form input[type="file"] {
     padding: 0;
   }
+  
   
