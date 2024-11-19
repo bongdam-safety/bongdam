@@ -22,8 +22,8 @@
   text-align: center;
   
 }
+
 /*  하단바  */
- 
 .footer{
   display: flex;
   position:fixed;
