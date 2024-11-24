@@ -8,60 +8,58 @@ const Add = () => {
   const navigate = useNavigate();
 
   // 입력 필드 상태 관리
-  const [category, setCategory] = useState("");
+  const [facilityCategoryId, setFacilityCategoryId] = useState(""); // 변수명 변경
   const [content, setContent] = useState("");
   const [remarks, setRemarks] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [pictures, setPictures] = useState([]);
+  const [images, setImages] = useState([]); // 변수명 유지
 
   const handleMapClick = (lat, lng) => {
     setLatitude(lat);
     setLongitude(lng);
     console.log("클릭한 좌표:", { lat, lng });
-
   };
 
-
-  const handlePictureChange = (e) => {
+  const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length > 1) {
       alert("사진은 최대 2장까지만 첨부할 수 있습니다.");
       return;
     }
-    setPictures(files);
+    setImages(files);
   };
 
   // 폼 제출 처리
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-     // 필수 데이터가 모두 입력되었는지 확인
-  if (!category) {
-    alert("분류를 선택해주세요.");
-    return;
-  }
-  if (!latitude || !longitude) {
-    alert("지도를 클릭하여 위치를 선택해주세요.");
-    return;
-  }
+    // 필수 데이터가 모두 입력되었는지 확인
+    if (!facilityCategoryId) {
+      alert("분류를 선택해주세요.");
+      return;
+    }
+    if (!latitude || !longitude) {
+      alert("지도를 클릭하여 위치를 선택해주세요.");
+      return;
+    }
 
     // FormData 객체 생성
     const formData = new FormData();
-    formData.append("facilityCategoryId", category);
+    formData.append("facilityCategoryId", facilityCategoryId); // 변경된 변수명 사용
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
     formData.append("content", content);
     formData.append("note", remarks);
 
     // 사진 파일이 선택된 경우에만 FormData에 추가
-    if (pictures.length > 0) {
-      pictures.forEach((file) => {
-        formData.append("pictures", file);
+    if (images.length > 0) {
+      images.forEach((file) => {
+        formData.append("images", file);
       });
     }
 
-    const apiUrl = `/api/facility/${category}`;
+    const apiUrl = `/api/facility`;
     try {
       // API로 POST 요청 보내기
       const response = await axios.post(apiUrl, formData, {
@@ -77,7 +75,7 @@ const Add = () => {
       }
     } catch (error) {
       console.error("시설 추가 실패:", error.response || error.message);
-      if(error.response){
+      if (error.response) {
         alert(`추가 실패: ${error.response.data.message || "오류가 발생했습니다."}`);
       }
     }
@@ -89,21 +87,20 @@ const Add = () => {
         <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>봉담 마을 지도</h1>
       </div>
       <div className="auth-form">
-       < KakaoMap
-       width="100%" height="300px"
-        onLocationSelect={(lat, lng) => {
-        setLatitude(lat);
-        setLongitude(lng);
-        
-      }}
-      showMarkerOnClick={true}
-    />
-          <form onSubmit={handleSubmit} className="add-form">
+        <KakaoMap
+          width="100%" height="300px"
+          onLocationSelect={(lat, lng) => {
+            setLatitude(lat);
+            setLongitude(lng);
+          }}
+          showMarkerOnClick={true}
+        />
+        <form onSubmit={handleSubmit} className="add-form">
           <label>분류</label>
           <select
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            name="facilityCategoryId"
+            value={facilityCategoryId} // 변경된 변수명 사용
+            onChange={(e) => setFacilityCategoryId(e.target.value)} // 변수명 변경
             required
           >
             <option value="">---선택하세요---</option>
@@ -126,7 +123,7 @@ const Add = () => {
             type="file"
             accept="image/*"
             multiple
-            onChange={handlePictureChange}
+            onChange={handleImageChange}
           />
 
           <label>비고</label>
