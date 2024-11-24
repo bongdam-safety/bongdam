@@ -6,16 +6,18 @@ import './Popup.css';
 const { kakao } = window;
 
 
-function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect, showMarkerOnClick = true }) {
+function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect, showMarkerOnClick = true,latitude,longitude}) {
     const [markersData, setMarkersData] = useState([]);
     const [popupInfo, setPopupInfo] = useState(null);
     const mapRef = useRef(null);
     const markersRef = useRef([]); // 마커 배열을 관리
     const navigate = useNavigate();
+    
 
     // 카테고리 변경 시 마커 데이터 가져오기
     useEffect(() => {
         const fetchMarkers = async () => {
+            if(! category) return
             try {
                 const response = await axios.get(`/api/facility/category/${category}`);
                 setMarkersData(response.data);
@@ -24,7 +26,6 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
                 console.error("Error fetching marker data:", error);
             }
         };
-
         fetchMarkers();
     }, [category]);
 
@@ -46,6 +47,19 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
         }
 
         const map = mapRef.current;
+        
+    // 주어진 위치에 마커 추가
+    if (latitude && longitude) {
+        const markerPosition = new kakao.maps.LatLng(latitude, longitude);
+        const marker = new kakao.maps.Marker({
+            position: markerPosition,
+            map: map,
+        });
+
+        map.setCenter(markerPosition);
+    }
+
+
 
         // 사용자 위치 표시
         const displayUserLocation = (lat, lon) => {

@@ -10,14 +10,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin: 0;
   }
-  .add-container h1{
-    cursor: pointer;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #333;  /* 글자 색상 */
-  }
+
   
   .add-form {
     display: flex;

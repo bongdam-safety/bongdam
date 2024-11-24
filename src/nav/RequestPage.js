@@ -50,11 +50,15 @@ const RequestPage = () => {
 
     try {
       // API 호출
+<<<<<<< HEAD
       const response = await axios.post(`/api/request_ToCenter`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+=======
+      const response = await axios.post('/api/request_ToCenter', formData);
+>>>>>>> ec1d550 (....)
       setMessage('요청이 성공적으로 전송되었습니다.');
     } catch (error) {
       setMessage('요청을 보내는 중 오류가 발생했습니다.');
