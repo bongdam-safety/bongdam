@@ -1,5 +1,5 @@
 .admin-container {
-  padding: 20px;
+  padding: 30px;
   font-family: Arial, sans-serif;
 }
 
@@ -32,7 +32,7 @@
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 50px 0;
 }
 
 .admin-table th,
