@@ -32,7 +32,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <KakaoMap category={selectedCategory} showMarkerOnClick={false} />
+      <KakaoMap category={selectedCategory} showMarkerOnClick={false} showUserLocation={true}/>
       <Footer onCategorySelect={handleCategorySelect} />
     </div>
   );

@@ -6,7 +6,7 @@ import './Popup.css';
 const { kakao } = window;
 
 
-function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect, showMarkerOnClick = true,latitude,longitude}) {
+function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect, showMarkerOnClick = true,latitude,longitude,showUserLocation = false,}) {
     const [markersData, setMarkersData] = useState([]);
     const [popupInfo, setPopupInfo] = useState(null);
     const mapRef = useRef(null);
@@ -81,7 +81,7 @@ function KakaoMap({ category, width = '100%', height = '100vh', onLocationSelect
             map.setCenter(locPosition);
         };
 
-        if (navigator.geolocation) {
+        if (showUserLocation&&navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const { latitude, longitude } = position.coords;

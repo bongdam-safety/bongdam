@@ -71,7 +71,7 @@ const Add = () => {
       // 요청 성공 시 처리 (예: 홈 페이지로 이동)
       if (response.status === 200) {
         console.log("시설 추가 성공:", response.data);
-        navigate("/"); // 홈으로 이동
+        navigate("/Admin"); // 홈으로 이동
       }
     } catch (error) {
       console.error("시설 추가 실패:", error.response || error.message);
@@ -94,6 +94,7 @@ const Add = () => {
             setLongitude(lng);
           }}
           showMarkerOnClick={true}
+          showUserLocation={false}
         />
         <form onSubmit={handleSubmit} className="add-form">
           <label>분류</label>

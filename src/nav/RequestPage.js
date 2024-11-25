@@ -93,7 +93,7 @@ const RequestPage = () => {
         />
 
         <label>지도</label>
-        <KakaoMap width="100%" height="300px" onLocationSelect={handleLocationSelect} />
+        <KakaoMap width="100%" height="300px" onLocationSelect={handleLocationSelect} showUserLocation={false} />
         {location.lat && location.lng && (
           <p>선택된 위치: 위도 {location.lat}, 경도 {location.lng}</p>
         )}

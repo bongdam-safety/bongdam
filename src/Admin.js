@@ -94,6 +94,7 @@ function Admin() {
                 height="300px"
                 showMarkerOnClick={false}
                 onLocationSelect={null}
+                showUserLocation={false}
               />
             </div>
             <p>{selectedRequest.content}</p>
