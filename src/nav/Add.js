@@ -84,7 +84,7 @@ const Add = () => {
   return (
     <div className="add-container">
       <div>
-        <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>봉담 마을 지도</h1>
+        <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>봉담읍 마을안전지도</h1>
       </div>
       <div className="auth-form">
         <KakaoMap
