@@ -50,7 +50,6 @@ const Add = () => {
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
     formData.append("content", content);
-    formData.append("note", remarks);
 
     // 사진 파일이 선택된 경우에만 FormData에 추가
     if (images.length > 0) {
@@ -125,13 +124,6 @@ const Add = () => {
             accept="image/*"
             multiple
             onChange={handleImageChange}
-          />
-
-          <label>비고</label>
-          <textarea
-            value={remarks}
-            onChange={(e) => setRemarks(e.target.value)}
-            placeholder="비고 입력"
           />
 
           <div className="submit">
