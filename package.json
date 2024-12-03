@@ -16,9 +16,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config build/webpack.dev.config.js",
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --config build/webpack.dev.config.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +42,5 @@
   "devDependencies": {
     "eslint-config-react-app": "^4.0.1"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://bongdamsafe.co.kr:8080"
 }
