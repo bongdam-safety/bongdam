@@ -50,6 +50,7 @@ const Add = () => {
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
     formData.append("content", content);
+    formData.append("note", remarks);
 
     // 사진 파일이 선택된 경우에만 FormData에 추가
     if (images.length > 0) {
@@ -83,7 +84,7 @@ const Add = () => {
   return (
     <div className="add-container">
       <div>
-        <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>봉담읍 마을안전지도</h1>
+        <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>봉담 마을 지도</h1>
       </div>
       <div className="auth-form">
         <KakaoMap
@@ -124,6 +125,13 @@ const Add = () => {
             accept="image/*"
             multiple
             onChange={handleImageChange}
+          />
+
+          <label>비고</label>
+          <textarea
+            value={remarks}
+            onChange={(e) => setRemarks(e.target.value)}
+            placeholder="비고 입력"
           />
 
           <div className="submit">
